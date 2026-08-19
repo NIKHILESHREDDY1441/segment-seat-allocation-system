@@ -1,0 +1,284 @@
+/* Bus Layout Container */
+.bus-layout-container {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--slate-200);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bus-cabin {
+  background: var(--slate-100);
+  border: 2px solid var(--slate-300);
+  border-radius: 20px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.bus-steering-area {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px dashed var(--slate-300);
+}
+
+.steering-wheel-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--navy-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #ffffff;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--slate-300);
+}
+
+/* Seat Grid */
+.seat-grid-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+  gap: 0.5rem;
+}
+
+.seat-pair {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.aisle-gap {
+  width: 28px;
+}
+
+/* Seat Component Base */
+.seat-btn {
+  width: 44px;
+  height: 48px;
+  border-radius: 8px 8px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all var(--transition-fast);
+  position: relative;
+  user-select: none;
+}
+
+.seat-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  width: 70%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(0,0,0,0.15);
+}
+
+/* Seat States */
+.seat-available {
+  background-color: var(--seat-available-bg);
+  border-color: var(--seat-available-border);
+  color: var(--seat-available-text);
+}
+
+.seat-available:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);
+}
+
+.seat-selected {
+  background-color: var(--seat-selected-bg);
+  border-color: var(--seat-selected-border);
+  color: var(--seat-selected-text);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+  transform: scale(1.05);
+}
+
+.seat-occupied {
+  background-color: var(--seat-occupied-bg);
+  border-color: var(--seat-occupied-border);
+  color: var(--seat-occupied-text);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.seat-segment-selected {
+  background-color: var(--seat-segment-bg);
+  border-color: var(--seat-segment-border);
+  color: var(--seat-segment-text);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25);
+}
+
+.seat-recommended {
+  background-color: var(--seat-recommended-bg);
+  border-color: var(--seat-recommended-border);
+  color: var(--seat-recommended-text);
+  animation: pulse-purple 2s infinite;
+}
+
+@keyframes pulse-purple {
+  0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(139, 92, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+}
+
+/* Sleeper Berth Modifications */
+.seat-sleeper {
+  width: 58px;
+  height: 80px;
+  border-radius: 8px;
+}
+
+.seat-sleeper::after {
+  top: 6px;
+  bottom: auto;
+  width: 80%;
+  height: 8px;
+  border-radius: 4px;
+}
+
+/* Legend */
+.seat-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1rem;
+  background: var(--slate-50);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--slate-200);
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--navy-700);
+}
+
+.legend-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid;
+}
+
+/* Segment Timeline */
+.segment-timeline-wrapper {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--slate-200);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+}
+
+.segment-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 2rem 1rem 1rem;
+}
+
+.segment-line {
+  position: absolute;
+  top: 48px;
+  left: 40px;
+  right: 40px;
+  height: 4px;
+  background: var(--slate-200);
+  z-index: 1;
+}
+
+.segment-stop-node {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  padding: 0 0.5rem;
+}
+
+.stop-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--primary-600);
+  border: 3px solid #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.stop-city {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy-900);
+}
+
+.segment-block-card {
+  border: 2px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  background: var(--slate-50);
+  transition: all var(--transition-fast);
+}
+
+.segment-block-card.active {
+  border-color: var(--primary-600);
+  background: #ffffff;
+  box-shadow: var(--shadow-md);
+}
+
+/* Optimal Allocation Comparison Cards */
+.allocation-card {
+  border: 2px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  background: #ffffff;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.allocation-card.recommended-card {
+  border-color: var(--seat-recommended-border);
+  background: linear-gradient(to bottom, #fcfaff, #ffffff);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.12);
+}
+
+.recommended-ribbon {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: var(--seat-recommended-border);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.85rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
