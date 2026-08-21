@@ -1,16 +1,650 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Segment Seat Allocation System - Bus Reservation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Travel - Segment Seat Allocation</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ===========================
+        NAVBAR
+============================ -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <i class="fa-solid fa-bus"></i>
+
+        <span>SMART TRAVEL</span>
+
+    </div>
+
+    <nav>
+
+        <a href="#">Home</a>
+
+        <a href="#">Search Bus</a>
+
+        <a href="#">Bookings</a>
+
+        <a href="#">My Trips</a>
+
+        <a href="#">Support</a>
+
+        <a href="#">Logout</a>
+
+    </nav>
+
+</header>
+
+<!-- ===========================
+        MAIN CONTAINER
+============================ -->
+
+<div class="main-container">
+
+<!-- ===========================
+        LEFT PANEL
+============================ -->
+
+<div class="left-panel">
+
+<!-- Journey Details -->
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-route"></i>
+
+Journey Details
+
+</h2>
+
+<div class="journey-grid">
+
+<div>
+
+<label>From</label>
+
+<p id="fromCity">Hyderabad</p>
+
+</div>
+
+<div>
+
+<label>To</label>
+
+<p id="toCity">Bangalore</p>
+
+</div>
+
+<div>
+
+<label>Date</label>
+
+<p>12 Aug 2026</p>
+
+</div>
+
+<div>
+
+<label>Passenger</label>
+
+<p>Nikhilesh Reddy</p>
+
+</div>
+
+<div>
+
+<label>Bus</label>
+
+<p id="busName">Orange Travels AC Sleeper</p>
+
+</div>
+
+<div>
+
+<label>Bus Number</label>
+
+<p>AP29 XX 4567</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Bus Selection -->
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-bus-simple"></i>
+
+Select Bus
+
+</h2>
+
+<select id="busSelector">
+
+<option value="bus1">
+
+Orange Travels - 2 × 2 Seater
+
+</option>
+
+<option value="bus2">
+
+APSRTC Super Luxury - 2 × 1
+
+</option>
+
+<option value="bus3">
+
+VRL Sleeper Coach
+
+</option>
+
+<option value="bus4">
+
+Custom Bus Layout
+
+</option>
+
+</select>
+
+</div>
+
+<!-- Route -->
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-location-dot"></i>
+
+Journey Route
+
+</h2>
+
+<ul class="timeline">
+
+<li>Hyderabad</li>
+
+<li>Kurnool</li>
+
+<li>Anantapur</li>
+
+<li>Bangalore</li>
+
+</ul>
+
+</div>
+
+<!-- Seat Legend -->
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-circle-info"></i>
+
+Seat Legend
+
+</h2>
+
+<div class="legend">
+
+<div>
+
+<span class="legend-box available"></span>
+
+Available
+
+</div>
+
+<div>
+
+<span class="legend-box occupied"></span>
+
+Booked
+
+</div>
+
+<div>
+
+<span class="legend-box selected"></span>
+
+Selected
+
+</div>
+
+<div>
+
+<span class="legend-box change"></span>
+
+Segment Seat
+
+</div>
+
+<div>
+
+<span class="legend-box recommended"></span>
+
+Recommended
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===========================
+        CENTER PANEL
+============================ -->
+
+<div class="center-panel">
+
+<div class="card">
+
+<h2>
+
+<i class="fa-solid fa-chair"></i>
+
+Seat Layout
+
+</h2>
+
+<div class="bus-info">
+
+<div>
+
+<strong>Bus Type :</strong>
+
+<span id="busType">
+
+2 × 2 AC Seater
+
+</span>
+
+</div>
+
+<div>
+
+<strong>Total Seats :</strong>
+
+<span id="seatCount">
+
+40
+
+</span>
+
+</div>
+
+<div>
+
+<strong>Seats Remaining :</strong>
+
+<span id="remainingSeats">
+
+28
+
+</span>
+
+</div>
+
+</div>
+
+<div class="driver">
+
+<i class="fa-solid fa-steering-wheel"></i>
+
+DRIVER
+
+</div>
+
+<!--
+IMPORTANT
+
+The seat layout is NO LONGER HARDCODED.
+
+JavaScript will automatically generate seats
+according to the layout selected by the admin.
+
+-->
+
+<div id="seatContainer" class="seat-container">
+
+<!-- Dynamic Seats Will Be Created Here -->
+
+</div>
+
+</div>
+<!-- ===========================
+        RIGHT PANEL
+============================ -->
+
+<div class="right-panel">
+
+    <!-- Recommended Seat -->
+
+    <div class="card">
+
+        <h2>
+
+            <i class="fa-solid fa-star"></i>
+
+            Recommended Seat
+
+        </h2>
+
+        <div class="recommend-card">
+
+            <h1 id="recommendedSeat">
+
+                12
+
+            </h1>
+
+            <p>
+
+                Best seat calculated using
+                Segment Allocation Algorithm
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Segment Allocation -->
+
+    <div class="card">
+
+        <h2>
+
+            <i class="fa-solid fa-diagram-project"></i>
+
+            Segment Seat Allocation
+
+        </h2>
+
+        <div id="segmentList">
+
+            <div class="segment">
+
+                <h3>
+
+                    Hyderabad → Kurnool
+
+                </h3>
+
+                <p>
+
+                    Seat :
+
+                    <span id="segment1">
+
+                        12
+
+                    </span>
+
+                </p>
+
+            </div>
+
+            <div class="segment">
+
+                <h3>
+
+                    Kurnool → Anantapur
+
+                </h3>
+
+                <p>
+
+                    Seat :
+
+                    <span id="segment2">
+
+                        18
+
+                    </span>
+
+                </p>
+
+            </div>
+
+            <div class="segment">
+
+                <h3>
+
+                    Anantapur → Bangalore
+
+                </h3>
+
+                <p>
+
+                    Seat :
+
+                    <span id="segment3">
+
+                        18
+
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Booking Summary -->
+
+    <div class="card">
+
+        <h2>
+
+            <i class="fa-solid fa-receipt"></i>
+
+            Booking Summary
+
+        </h2>
+
+        <table class="summary-table">
+
+            <tr>
+
+                <td>Passenger</td>
+
+                <td>Nikhilesh Reddy</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Selected Seat</td>
+
+                <td id="summarySeat">
+
+                    12
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Fare</td>
+
+                <td>
+
+                    ₹850
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Distance</td>
+
+                <td>
+
+                    570 KM
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Status</td>
+
+                <td>
+
+                    Ready
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- Seat Change Alert -->
+
+    <div class="card seat-alert">
+
+        <h2>
+
+            <i class="fa-solid fa-bell"></i>
+
+            Seat Change Alert
+
+        </h2>
+
+        <p>
+
+            Change your seat at
+
+            <strong>
+
+                Kurnool
+
+            </strong>
+
+        </p>
+
+        <h3>
+
+            Seat
+
+            <span id="oldSeat">
+
+                12
+
+            </span>
+
+            →
+
+            <span id="newSeat">
+
+                18
+
+            </span>
+
+        </h3>
+
+    </div>
+
+    <!-- Journey Progress -->
+
+    <div class="card">
+
+        <h2>
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Journey Progress
+
+        </h2>
+
+        <div class="progress-bar">
+
+            <span id="progressFill">
+
+            </span>
+
+        </div>
+
+        <p>
+
+            <span id="progressValue">
+
+                96
+
+            </span>
+
+            %
+
+            Journey Successfully Allocated
+
+        </p>
+
+    </div>
+
+    <!-- Buttons -->
+
+    <div class="action-buttons">
+
+        <button id="confirmBtn" class="confirm">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Confirm Booking
+
+        </button>
+
+        <button id="resetBtn" class="cancel">
+
+            <i class="fa-solid fa-rotate-left"></i>
+
+            Reset Selection
+
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
 </html>
